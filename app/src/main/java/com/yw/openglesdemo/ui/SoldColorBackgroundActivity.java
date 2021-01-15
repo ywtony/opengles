@@ -1,11 +1,14 @@
 package com.yw.openglesdemo.ui;
 
+import android.graphics.Color;
+import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
 import com.yw.openglesdemo.BaseActivity;
 import com.yw.openglesdemo.R;
+import com.yw.openglesdemo.local.NativeColorRender;
 
 /**
  * @ProjectName: OpenGLEsDemo
@@ -20,9 +23,19 @@ import com.yw.openglesdemo.R;
  * @Version: 1.0
  */
 public class SoldColorBackgroundActivity extends BaseActivity {
+    private GLSurfaceView glSurfaceView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sold_color_background);
+//        setContentView(R.layout.activity_sold_color_background);
+        setUpViews();
+    }
+    private void setUpViews(){
+        glSurfaceView = new GLSurfaceView(this);
+        setContentView(glSurfaceView);
+        //设置版本
+        glSurfaceView.setEGLContextClientVersion(3);
+        GLSurfaceView.Renderer renderer = new NativeColorRender(Color.RED);
+        glSurfaceView.setRenderer(renderer);
     }
 }
